@@ -12,7 +12,7 @@ config :phoenix, Pitch.Router,
   secret_key_base: "pvHd1avU+ubFUZSlDseooonP9BiFDkVDWAGILD1/1rscIDllcvEuNR0lKEAP+9j2WkKK5c0vwxG45L1OESHdRQ==",
   catch_errors: true,
   debug_errors: false,
-  error_controller: Pitch.PageController
+  error_controller: Pitch.RoomController
 
 # Session configuration
 config :phoenix, Pitch.Router,
