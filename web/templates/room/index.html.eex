@@ -1,0 +1,12 @@
+<h2>Rooms</h2>
+
+<ul>
+  <%= for room <- @rooms do %>
+    <li>
+      <a href="/room/<%= room.id %>"><%= room.name %></a>
+      (<a href="/room/<%= room.id %>/delete">x</a>)
+    </li>
+  <% end %>
+</ul>
+
+<a href="room/new">New Room</a>

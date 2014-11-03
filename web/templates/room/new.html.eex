@@ -1,0 +1,10 @@
+<h1>New Room</h1>
+
+<form action="/room" method="post">
+  <div class="form-group">
+    <label for="room[name]">Name</label>
+    <input type="text" name="room[name]" class="form-control" />
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+  <a href="/" class="btn btn-default">Cancel</a>
+</form>
