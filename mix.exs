@@ -26,7 +26,8 @@ defmodule Pitch.Mixfile do
       {:phoenix, github: "phoenixframework/phoenix"},
       {:cowboy, "~> 1.0"},
       {:postgrex, "~> 0.6.0"},
-      {:ecto, "~> 0.2.5"}
+      {:ecto, "~> 0.2.5"},
+      {:exrm, "~> 0.14.11"}
     ]
   end
 end

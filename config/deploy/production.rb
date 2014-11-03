@@ -1,0 +1,9 @@
+server "162.243.250.241", :app, :web, :db, :primary => true
+set :user, 'www-data'
+set :branch, :master
+set :mix_env, :prod
+set :deploy_to, "/var/www/pitch"
+
+set :default_environment, {
+  'PATH' => "$PATH:/var/www/src/elixir/bin" # --> replace by path to your elixir bin folder
+}
