@@ -2,3 +2,7 @@
   max-height: 100%;
   overflow: scroll;
 }
+
+#message-form {
+  display: none;
+}

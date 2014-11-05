@@ -2,11 +2,13 @@ $(function(){
   var socket = new Phoenix.Socket("ws://" + location.host + "/ws");
   var height;
 
-  var $messages = $("#messages");
-  var $form     = $("#chat");
-  var $username = $("#username");
-  var $message  = $("#message");
-  var $roomName = $("#room_info").data("name")
+  var $messages     = $("#messages");
+  var $roomName     = $("#room_info").data("name")
+
+  var $usernameForm = $("#username-form");
+  var $username     = $("#username");
+  var $messageForm  = $("#message-form");
+  var $message      = $("#message");
 
   var scrollToBottom = function() {
     height = $messages[0].scrollHeight;
@@ -16,10 +18,20 @@ $(function(){
   scrollToBottom();
 
   socket.join("rooms", $roomName, {}, function(channel) {
-    $form.submit(function(e) {
+    $usernameForm.submit(function(e) {
+      e.preventDefault();
+      var token = Math.random().toString(36).substr(8);
+
+      channel.send("user:new", {username: $username.val(), token: token});
+
+      $usernameForm.hide();
+      $messageForm.show();
+    })
+
+    $messageForm.submit(function(e) {
       e.preventDefault();
 
-      channel.send("message:new", {username: $username.val(), body: $message.val()});
+      channel.send("message:new", {body: $message.val()});
       $message.val("");
     })
 
@@ -29,12 +41,12 @@ $(function(){
     });
 
     channel.on("user:entered", function(message) {
-      $messages.append("<br/>someone entered")
+      $messages.append("<br/>[" + message.username + "] entered")
       scrollToBottom();
     });
 
     channel.on("user:left", function(message) {
-      $messages.append("<br/>someone left")
+      $messages.append("<br/>[" + message.username + "] left")
       scrollToBottom();
     });
   });

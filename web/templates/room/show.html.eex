@@ -15,11 +15,17 @@
 
   <br/>
 
-  <form id="chat">
+  <form id="username-form">
     <div class="input-group">
       <span class="input-group-addon">@</span>
       <input type="text" class="form-control" placeholder="Username" id="username">
+      <span class="input-group-btn">
+        <input type="submit" value=">" class="btn">
+      </span>
     </div>
+  </form>
+
+  <form id="message-form">
     <div class="input-group">
       <input id="message" class="form-control">
       <span class="input-group-btn">
