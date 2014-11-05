@@ -15,7 +15,18 @@ defmodule Pitch.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Pitch, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [
+      :phoenix,
+      :cowboy,
+      :logger,
+      :conform,
+      :decimal,
+      :ecto,
+      :exrm,
+      :poolboy,
+      :postgrex
+      ]
+    ]
   end
 
   # Specifies your project dependencies
@@ -24,10 +35,10 @@ defmodule Pitch.Mixfile do
   defp deps do
     [
       {:phoenix, github: "phoenixframework/phoenix"},
-      {:cowboy, "~> 1.0"},
-      {:postgrex, "~> 0.6.0"},
-      {:ecto, "~> 0.2.5"},
-      {:exrm, "~> 0.14.11"}
+      {:cowboy,   "~> 1.0"     },
+      {:postgrex, "~> 0.6.0"   },
+      {:ecto,     "~> 0.2.5"   },
+      {:exrm,     "~> 0.14.11" }
     ]
   end
 end
