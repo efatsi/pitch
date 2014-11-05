@@ -2,9 +2,14 @@ defmodule Pitch.RoomChannel do
   use Phoenix.Channel
   import Ecto.Query, only: [from: 2]
 
-  def join(socket, _topic, message) do
-    broadcast socket, "user:entered", %{username: message["username"] || "anon"}
+  def join(socket, _topic, _message) do
+    broadcast socket, "user:entered", %{}
     {:ok, socket}
+  end
+
+  def leave(socket, _message) do
+    broadcast socket, "user:left", %{}
+    socket
   end
 
   def event(socket, "message:new", message) do

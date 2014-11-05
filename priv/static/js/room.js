@@ -23,7 +23,11 @@ $(function(){
     });
 
     channel.on("user:entered", function(message) {
-      $messages.append("<br/>[" + message.username + "] entered")
+      $messages.append("<br/>someone entered")
+    });
+
+    channel.on("user:left", function(message) {
+      $messages.append("<br/>someone left")
     });
   });
 });
