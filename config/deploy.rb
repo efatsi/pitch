@@ -53,6 +53,14 @@ namespace :deploy do
     run "cd #{current_path}/rel/pitch/bin && ./pitch start"
   end
 
+  task :migrate, roles: :web do
+    if is_application_running?(current_path)
+      run "cd #{current_path} && ./rel/pitch/bin/pitch stop && mix ecto.migrate Repo && ./rel/pitch/bin/pitch start"
+    else
+      run "cd #{current_path} && mix ecto.migrate Repo && ./rel/pitch/bin/pitch start"
+    end
+  end
+
   task :stop, roles: :web do
     run "cd #{current_path}/rel/pitch/bin && ./pitch stop"
   end
