@@ -1,7 +1,7 @@
 server "162.243.250.241", :app, :web, :db, :primary => true
 set :user, 'www-data'
 set :branch, :master
-set :mix_env, :prod
+set :mix_env, :dev
 set :deploy_to, "/var/www/pitch"
 
 set :default_environment, {
