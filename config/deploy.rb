@@ -39,7 +39,7 @@ namespace :deploy do
   end
 
   task :build, roles: :web do
-    run "cd #{current_path} && mix deps.get && MIX_ENV=#{mix_env} mix release"
+    run "cd #{current_path} && mix deps.get && MIX_ENV=#{mix_env} mix release && npm install && npm run build"
   end
 
   task :restart, roles: :web do

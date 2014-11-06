@@ -9,7 +9,7 @@
     "watchify":   "latest"
   },
   "scripts": {
-    "build-js": "browserify priv/static/js/room.js > priv/static/js/bundle.js",
-    "watch-js": "watchify priv/static/js/room.js -o priv/static/js/bundle.js -v"
+    "build": "browserify -t [ reactify --harmony ] priv/static/js/app/room.js > priv/static/js/bundle.js",
+    "watch": "watchify -t [ reactify --harmony ] priv/static/js/app/room.js -o priv/static/js/bundle.js -v"
   }
 }
