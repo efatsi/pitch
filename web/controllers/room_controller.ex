@@ -63,8 +63,12 @@ defmodule Pitch.RoomController do
   # private
 
   defp message_json(messages) do
-    Enum.map(messages, fn(m) ->
-      "{\"username\":\"#{m.username}\",\"body\":\"#{m.body}\"}"
-    end) |> Enum.join(",")
+    {:ok, encoded} = messages
+    |> Enum.into([], fn(message) ->
+      %{username: message.username, body: message.body}
+    end)
+    |> JSON.encode
+
+    encoded
   end
 end

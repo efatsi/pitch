@@ -38,6 +38,7 @@ defmodule Pitch.Mixfile do
       {:cowboy,   "~> 1.0"     },
       {:postgrex, "~> 0.6.0"   },
       {:ecto,     "~> 0.2.5"   },
+      {:json,     "~> 0.3.0"   },
       {:exrm,     "~> 0.14.11" }
     ]
   end

@@ -10,7 +10,7 @@
 
 <div id="room_info"
   data-name="<%= @room.name %>"
-  data-messages="[<%= @messages %>]"
+  data-messages="<%= @messages %>"
 />
 
 <link rel="stylesheet" href="/css/room.css">
