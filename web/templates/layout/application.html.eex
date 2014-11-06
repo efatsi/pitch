@@ -9,7 +9,6 @@
 
     <title>Hello Phoenix!</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <script src="/js/jquery.js"></script>
     <script src="/js/phoenix.js"></script>
   </head>
 

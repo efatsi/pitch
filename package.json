@@ -1,0 +1,15 @@
+{
+  "name": "Pitch",
+  "version": "0.0.1",
+  "author": "Eli Fatsi",
+  "description": "Pitch written in Elixir",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "latest",
+    "watchify":   "latest"
+  },
+  "scripts": {
+    "build-js": "browserify priv/static/js/room.js > priv/static/js/bundle.js",
+    "watch-js": "watchify priv/static/js/room.js -o priv/static/js/bundle.js -v"
+  }
+}

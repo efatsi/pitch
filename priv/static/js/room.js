@@ -1,53 +1,49 @@
-$(function(){
-  var socket = new Phoenix.Socket("ws://" + location.host + "/ws");
-  var height;
+$          = require("./vendor/jquery.min")
+autoScroll = require("./auto_scroll.js")
 
-  var $messages     = $("#messages");
-  var $roomName     = $("#room_info").data("name")
+var socket = new Phoenix.Socket("ws://" + location.host + "/ws");
+var height;
 
-  var $usernameForm = $("#username-form");
-  var $username     = $("#username");
-  var $messageForm  = $("#message-form");
-  var $message      = $("#message");
+var $messages     = $("#messages");
+var $roomName     = $("#room_info").data("name")
 
-  var scrollToBottom = function() {
-    height = $messages[0].scrollHeight;
-    $messages.scrollTop(height);
-  }
+var $usernameForm = $("#username-form");
+var $username     = $("#username");
+var $messageForm  = $("#message-form");
+var $message      = $("#message");
 
-  scrollToBottom();
+autoScroll();
 
-  socket.join("rooms", $roomName, {}, function(channel) {
-    $usernameForm.submit(function(e) {
-      e.preventDefault();
-      var token = Math.random().toString(36).substr(8);
+socket.join("rooms", $roomName, {}, function(channel) {
+  $usernameForm.submit(function(e) {
+    e.preventDefault();
+    var token = Math.random().toString(36).substr(8);
 
-      channel.send("user:new", {username: $username.val(), token: token});
+    channel.send("user:new", {username: $username.val(), token: token});
 
-      $usernameForm.hide();
-      $messageForm.show();
-    })
+    $usernameForm.hide();
+    $messageForm.show();
+  })
 
-    $messageForm.submit(function(e) {
-      e.preventDefault();
+  $messageForm.submit(function(e) {
+    e.preventDefault();
 
-      channel.send("message:new", {body: $message.val()});
-      $message.val("");
-    })
+    channel.send("message:new", {body: $message.val()});
+    $message.val("");
+  })
 
-    channel.on("message:new", function(message) {
-      $messages.append("<br/>[" + message.username + "] " + message.body)
-      scrollToBottom();
-    });
+  channel.on("message:new", function(message) {
+    $messages.append("<br/>[" + message.username + "] " + message.body)
+    autoScroll();
+  });
 
-    channel.on("user:entered", function(message) {
-      $messages.append("<br/>[" + message.username + "] entered")
-      scrollToBottom();
-    });
+  channel.on("user:entered", function(message) {
+    $messages.append("<br/>[" + message.username + "] entered")
+    autoScroll();
+  });
 
-    channel.on("user:left", function(message) {
-      $messages.append("<br/>[" + message.username + "] left")
-      scrollToBottom();
-    });
+  channel.on("user:left", function(message) {
+    $messages.append("<br/>[" + message.username + "] left")
+    autoScroll();
   });
 });
