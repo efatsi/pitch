@@ -1,6 +1,7 @@
 #messages {
   position: fixed;
   height: 75%;
+  width: 40%;
   overflow: scroll;
 }
 
