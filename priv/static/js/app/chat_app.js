@@ -27,7 +27,7 @@ var ChatApp = React.createClass({
   },
 
   autoScroll() {
-    var node = this.getDOMNode();
+    var node = document.getElementById("messages");
     node.scrollTop = node.scrollHeight;
   },
 
@@ -86,10 +86,12 @@ var ChatApp = React.createClass({
 
   render() {
     return (
-      <div id="messages">
+      <div>
         <h3>Chat area</h3>
-        {this.messages()}
-        {this.form()}
+        <div id="messages">
+          {this.messages()}
+          {this.form()}
+        </div>
       </div>
     );
   }
