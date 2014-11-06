@@ -1,8 +1,9 @@
 #messages {
-  max-height: 500px;
+  position: fixed;
+  height: 75%;
   overflow: scroll;
 }
 
-#message-form {
-  display: none;
+.chat-form {
+  padding-top: 10px;
 }

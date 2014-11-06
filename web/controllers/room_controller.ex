@@ -14,7 +14,7 @@ defmodule Pitch.RoomController do
     records = Repo.all(from r in Room, where: r.id == ^String.to_integer(id), preload: :messages)
     case records do
       [room] ->
-        render conn, "show.html", room: room, messages: room.messages.all
+        render conn, "show.html", room: room, messages: room.messages.all |> message_json
       [] ->
         render conn, "not_found.html"
     end
@@ -58,5 +58,13 @@ defmodule Pitch.RoomController do
 
   def error(conn, _params) do
     render conn, "error.html"
+  end
+
+  # private
+
+  defp message_json(messages) do
+    Enum.map(messages, fn(m) ->
+      "{\"username\":\"#{m.username}\",\"body\":\"#{m.body}\"}"
+    end) |> Enum.join(",")
   end
 end

@@ -1,4 +1,4 @@
-var React = require("react")
+var React = require("react");
 
 var Message = React.createClass({
   render() {
@@ -6,8 +6,8 @@ var Message = React.createClass({
       <div className="message">
         [{this.props.username}] {this.props.body}
       </div>
-    )
+    );
   }
 })
 
-module.exports = Message
+module.exports = Message;

@@ -4,7 +4,6 @@
   "author": "Eli Fatsi",
   "description": "Pitch written in Elixir",
   "dependencies": {
-    "jquery": "latest",
     "underscore": "latest",
     "react": "latest"
   },
