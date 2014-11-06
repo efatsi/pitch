@@ -5,37 +5,38 @@
 </div>
 
 <div class="col-xs-3">
-  <h3>Chat area</h3>
-
-  <div id="messages">
-    <%= for message <- @messages do %>
-      <br>[<%= message.username %>] <%= message.body %>
-    <% end %>
-  </div>
-
-  <br/>
-
-  <form id="username-form">
-    <div class="input-group">
-      <span class="input-group-addon">@</span>
-      <input type="text" class="form-control" placeholder="Username" id="username">
-      <span class="input-group-btn">
-        <input type="submit" value=">" class="btn">
-      </span>
-    </div>
-  </form>
-
-  <form id="message-form">
-    <div class="input-group">
-      <input id="message" class="form-control">
-      <span class="input-group-btn">
-        <input type="submit" value="Send" class="btn">
-      </span>
-    </div>
-  </form>
+  <div id="chat-app"></div>
 </div>
 
-<div id="room_info" data-name="<%= @room.name %>" />
+<div id="room_info"
+  data-name="<%= @room.name %>"
+  data-messages="[<%= Enum.map(@messages, fn(m) ->
+    "{\"username\":\"#{m.username}\",\"body\":\"#{m.body}\"}"
+  end) |> Enum.join(",") %>]"
+/>
+
+<link rel="stylesheet" href="/css/room.css">
 
 <script src="/js/bundle.js"></script>
-<link rel="stylesheet" href="/css/room.css">
+
+
+<!-- <h3>Chat area</h3>
+
+<form id="username-form">
+  <div class="input-group">
+    <span class="input-group-addon">@</span>
+    <input type="text" class="form-control" placeholder="Username" id="username">
+    <span class="input-group-btn">
+      <input type="submit" value=">" class="btn">
+    </span>
+  </div>
+</form>
+
+<form id="message-form">
+  <div class="input-group">
+    <input id="message" class="form-control">
+    <span class="input-group-btn">
+      <input type="submit" value="Send" class="btn">
+    </span>
+  </div>
+</form> -->

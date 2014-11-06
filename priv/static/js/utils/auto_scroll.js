@@ -1,6 +1,8 @@
+var $ = require("jquery")
+
 module.exports = function() {
   var $messages = $("#messages");
 
-  height = $messages[0].scrollHeight;
+  var height = $messages[0].scrollHeight;
   $messages.scrollTop(height);
 }

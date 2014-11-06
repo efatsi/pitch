@@ -3,8 +3,13 @@
   "version": "0.0.1",
   "author": "Eli Fatsi",
   "description": "Pitch written in Elixir",
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "latest",
+    "underscore": "latest",
+    "react": "latest"
+  },
   "devDependencies": {
+    "reactify": "latest",
     "browserify": "latest",
     "watchify":   "latest"
   },
