@@ -24,7 +24,8 @@ defmodule Pitch.Mixfile do
       :ecto,
       :exrm,
       :poolboy,
-      :postgrex
+      :postgrex,
+      :json
       ]
     ]
   end
