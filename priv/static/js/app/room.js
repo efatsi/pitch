@@ -9,18 +9,17 @@ var messages = JSON.parse(roomInfo.getAttribute("data-messages"));
 var socket = new Phoenix.Socket("ws://" + location.host + "/ws");
 
 socket.join("rooms", roomName, {}, function(channel) {
-  socketAPI = {
-    login(username) {
-      var token = Math.random().toString(36).substr(8);
-      channel.send("user:new", {username: username, token: token});
-    },
-
-    sendMessage(body) {
-      channel.send("message:new", {body: body});
-    }
+  login = function(username) {
+    var token = Math.random().toString(36).substr(8);
+    channel.send("user:new", {username: username, token: token});
   }
 
-  EventHandler.socketAPI = socketAPI
+  sendMessage = function(body) {
+    channel.send("message:new", {body: body});
+  }
+
+  EventHandler.addListener("login", login);
+  EventHandler.addListener("sendMessage", sendMessage);
 
   channel.on("message:new", function(message) {
     EventHandler.newMessage(message);
@@ -36,6 +35,6 @@ socket.join("rooms", roomName, {}, function(channel) {
 });
 
 React.render(
-  <ChatApp messages={messages} eventHandler={EventHandler} />,
+  <ChatApp messages={messages} />,
   document.getElementById("chat-app")
 );

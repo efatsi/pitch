@@ -1,6 +1,7 @@
-var _          = require("underscore");
-var React      = require("react");
-var Message    = require("./message");
+var _            = require("underscore");
+var React        = require("react");
+var Message      = require("./message");
+var EventHandler = require("./event_handler.js");
 
 var ChatApp = React.createClass({
   getInitialState() {
@@ -8,12 +9,12 @@ var ChatApp = React.createClass({
   },
 
   componentDidMount() {
-    this.props.eventHandler.addEventListener(this.newEvent);
+    EventHandler.addListener("chat", this.newEvent);
     this.autoScroll();
   },
 
   componentWillUnmount() {
-    this.props.eventHandler.removeEventListener(this.newEvent);
+    EventHandler.removeListener("chat", this.newEvent);
   },
 
   componentDidUpdate() {
@@ -39,7 +40,7 @@ var ChatApp = React.createClass({
     e.preventDefault();
     var username = this.refs.username.getDOMNode().value.trim();
 
-    this.props.eventHandler.login(username);
+    EventHandler.login(username);
     this.setState({loggedIn: true});
   },
 
@@ -61,7 +62,7 @@ var ChatApp = React.createClass({
     e.preventDefault();
     var message = this.refs.message.getDOMNode().value.trim();
 
-    this.props.eventHandler.sendMessage(message);
+    EventHandler.sendMessage(message);
     this.refs.message.getDOMNode().value = "";
   },
 
