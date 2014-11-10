@@ -16,6 +16,6 @@ defmodule Pitch.Router do
     get "/room/:id",        Pitch.RoomController, :show
     post "/room",           Pitch.RoomController, :create
 
-    channel "rooms", Pitch.RoomChannel
+    channel "chat", Pitch.ChatChannel
   end
 end

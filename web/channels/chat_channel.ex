@@ -1,4 +1,4 @@
-defmodule Pitch.RoomChannel do
+defmodule Pitch.ChatChannel do
   use Phoenix.Channel
   import Ecto.Query, only: [from: 2]
 
