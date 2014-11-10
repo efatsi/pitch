@@ -1,7 +1,7 @@
 var _            = require("underscore");
 var React        = require("react");
 var Message      = require("./message");
-var EventHandler = require("./event_handler.js");
+var EventHandler = require("./event_handler");
 
 var ChatApp = React.createClass({
   getInitialState() {
@@ -18,7 +18,6 @@ var ChatApp = React.createClass({
   },
 
   componentDidUpdate() {
-    console.log("component updated");
     this.autoScroll();
   },
 

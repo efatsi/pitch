@@ -1,9 +1,8 @@
-var EventHandler = require("./event_handler.js");
+var EventHandler = require("./event_handler");
+var socket       = require("../shared/socket");
 
 var roomInfo = document.getElementById("room_info");
 var roomName = roomInfo.getAttribute("data-name");
-
-var socket = new Phoenix.Socket("ws://" + location.host + "/ws");
 
 socket.join("chat", roomName, {}, function(channel) {
   login = function(username) {

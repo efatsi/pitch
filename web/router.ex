@@ -17,5 +17,6 @@ defmodule Pitch.Router do
     post "/room",           Pitch.RoomController, :create
 
     channel "chat", Pitch.ChatChannel
+    channel "game", Pitch.GameChannel
   end
 end
