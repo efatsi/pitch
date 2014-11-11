@@ -1,10 +1,9 @@
-var EventHandler = require("./event_handler");
-var socket       = require("../shared/socket");
+var EventHandler  = require("./event_handler");
+var GlobalHandler = require("../shared/event_handler");
+var socket        = require("../shared/socket");
+var roomInfo      = require("../shared/room_info");
 
-var roomInfo = document.getElementById("room_info");
-var roomName = roomInfo.getAttribute("data-name");
-
-socket.join("chat", roomName, {}, function(channel) {
+socket.join("chat", roomInfo.name, {}, function(channel) {
   login = function(username) {
     var token = Math.random().toString(36).substr(8);
     channel.send("user:new", {username: username, token: token});
@@ -22,10 +21,16 @@ socket.join("chat", roomName, {}, function(channel) {
   });
 
   channel.on("user:entered", function(message) {
-    EventHandler.userEntered(message.username);
+    var username = message.username;
+
+    GlobalHandler.userActivity();
+    EventHandler.userEntered(username);
   });
 
   channel.on("user:left", function(message) {
-    EventHandler.userLeft(message.username);
+    var username = message.username;
+
+    GlobalHandler.userActivity();
+    EventHandler.userLeft(username);
   });
 });
