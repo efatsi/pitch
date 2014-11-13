@@ -21,8 +21,9 @@ var Chat = React.createClass({
     this.setState(this.getState())
   },
 
-  componentWillMount() {
+  componentDidMount() {
     Store.onChange(this.updateState)
+    this.autoScroll()
   },
 
   componentWillUnmount() {
