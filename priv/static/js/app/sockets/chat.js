@@ -30,16 +30,14 @@ socket.join("chat", roomInfo.name, {}, function(channel) {
   })
 
   channel.on("message:new", function(message) {
-    Store.add("messages", message)
+    Store.add_message(message)
   })
 
-  channel.on("user:entered", function(message) {
-    var username = message.username
-    Store.add("messages", {username, body: "entered"})
+  channel.on("user:entered", function(user) {
+    Store.add_user(user)
   })
 
-  channel.on("user:left", function(message) {
-    var username = message.username
-    Store.add("messages", {username, body: "left"})
+  channel.on("user:left", function(user) {
+    Store.remove_user(user)
   })
 })

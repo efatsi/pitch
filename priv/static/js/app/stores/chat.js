@@ -50,11 +50,23 @@ var ChatStore = merge(Events.EventEmitter.prototype, {
     ChatStore.emit(CHANGE)
   },
 
-  /**
-   * Add an element to an array property
-   */
-  add(prop, value) {
-    ChatStore.set(prop, ChatStore.get(prop).concat([value]))
+  add_user(user) {
+    this._add("users", user)
+    this.add_message({username: user.username, body: "entered"})
+  },
+
+  remove_user(user) {
+    var users = this.get("users")
+    this.set("users", users.splice(users.indexOf(user), 1))
+    this.add_message({username: user.username, body: "left"})
+  },
+
+  add_message(message) {
+    this._add("messages", message)
+  },
+
+  _add(prop, value) {
+    this.set(prop, this.get(prop).concat([value]))
   }
 })
 

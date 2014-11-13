@@ -9,7 +9,7 @@ defmodule Pitch.ChatChannel do
   def leave(socket, _message) do
     if user = get_assign(socket, :user) do
       Repo.delete user
-      broadcast socket, "user:left", %{username: user.name}
+      broadcast socket, "user:left", %{id: user.id, username: user.name}
     end
 
     socket
@@ -22,7 +22,7 @@ defmodule Pitch.ChatChannel do
     socket = assign(socket, :user, user)
     socket = assign(socket, :room, room)
 
-    broadcast socket, "user:entered", %{username: user.name}
+    broadcast socket, "user:entered", %{id: user.id, username: user.name}
     socket
   end
 
@@ -31,7 +31,7 @@ defmodule Pitch.ChatChannel do
     user    = get_assign(socket, :user)
     message = save_message(room, user, message)
 
-    broadcast socket, "message:new", %{username: user.name, body: message.body, id: message.id}
+    broadcast socket, "message:new", %{id: message.id, username: user.name, body: message.body}
     socket
   end
 
