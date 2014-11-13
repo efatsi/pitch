@@ -11,10 +11,13 @@ defmodule Pitch.RoomController do
   end
 
   def show(conn, %{"id" => id}) do
-    records = Repo.all(from r in Room, where: r.id == ^String.to_integer(id), preload: :messages)
+    records = Repo.all(from r in Room, where: r.id == ^String.to_integer(id), preload: [:users, :messages])
     case records do
       [room] ->
-        render conn, "show.html", room: room, messages: room.messages.all |> message_json
+        render conn, "show.html",
+          room: room,
+          users: room.users.all |> users_json,
+          messages: room.messages.all |> messages_json
       [] ->
         render conn, "not_found.html"
     end
@@ -39,10 +42,11 @@ defmodule Pitch.RoomController do
   end
 
   def destroy(conn, %{"id" => id}) do
-    records = Repo.all(from r in Room, where: r.id == ^String.to_integer(id), preload: :messages)
+    records = Repo.all(from r in Room, where: r.id == ^String.to_integer(id), preload: [:messages, :users])
     case records do
       [room] ->
         Repo.delete_all room.messages
+        Repo.delete_all room.users
         Repo.delete room
         redirect conn, "/"
       _ ->
@@ -62,10 +66,20 @@ defmodule Pitch.RoomController do
 
   # private
 
-  defp message_json(messages) do
+  defp users_json(messages) do
+    {:ok, encoded} = messages
+    |> Enum.into([], fn(user) ->
+      %{id: user.id, username: user.name}
+    end)
+    |> JSON.encode
+
+    encoded
+  end
+
+  defp messages_json(messages) do
     {:ok, encoded} = messages
     |> Enum.into([], fn(message) ->
-      %{username: message.username, body: message.body}
+      %{id: message.id, username: message.username, body: message.body}
     end)
     |> JSON.encode
 

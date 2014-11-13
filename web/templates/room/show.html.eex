@@ -11,6 +11,7 @@
 <div id="room_info"
   data-name="<%= @room.name %>"
   data-messages="<%= @messages %>"
+  data-users="<%= @users %>"
 />
 
 <link rel="stylesheet" href="/css/room.css">

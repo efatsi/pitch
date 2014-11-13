@@ -31,7 +31,7 @@ defmodule Pitch.ChatChannel do
     user    = get_assign(socket, :user)
     message = save_message(room, user, message)
 
-    broadcast socket, "message:new", %{username: user.name, body: message.body}
+    broadcast socket, "message:new", %{username: user.name, body: message.body, id: message.id}
     socket
   end
 
