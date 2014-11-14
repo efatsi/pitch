@@ -1,7 +1,7 @@
-var React   = require("react")
-var Store   = require("../../stores/game")
-var Actions = require("../../actions/chat")
-var User    = require("./user")
+var React    = require("react")
+var Store    = require("../../stores/game")
+var Actions  = require("../../actions/chat")
+var UserList = require("./user_list")
 
 var Game = React.createClass({
   getInitialState() {
@@ -24,28 +24,11 @@ var Game = React.createClass({
     Store.offChange(this.updateState)
   },
 
-  users() {
-    return this.state.users.map(function(user, i) {
-      return <User key={user.id} username={user.username} />
-    })
-  },
-
-  userList() {
-    return (
-      <div id="users">
-        <h4>Users present ({this.state.userCount}):</h4>
-        <ul>
-          {this.users()}
-        </ul>
-      </div>
-    )
-  },
-
   render() {
     return (
       <div>
         <h3>Game area</h3>
-        {this.userList()}
+        <UserList users={this.state.users} />
       </div>
     )
   }
