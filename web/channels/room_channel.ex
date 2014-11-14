@@ -1,4 +1,4 @@
-defmodule Pitch.ChatChannel do
+defmodule Pitch.RoomChannel do
   use Phoenix.Channel
   import Ecto.Query, only: [from: 2]
 
@@ -56,5 +56,10 @@ defmodule Pitch.ChatChannel do
   defp room_from_socket(socket) do
     Repo.all(from r in Room, where: r.name == ^socket.topic)
     |> List.first
+  end
+
+  defp users(room) do
+    Repo.all(from u in User, where: u.room_id == ^room.id)
+    |> Enum.map(&(&1.name))
   end
 end
