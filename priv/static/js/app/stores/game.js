@@ -4,7 +4,8 @@ var Immutable = require("immutable")
 var roomInfo  = require("../shared/room_info")
 
 var _data = Immutable.Map({
-  users : roomInfo.users,
+  users     : roomInfo.users,
+  userCount : roomInfo.users.length
 })
 
 var GameStore = merge(BaseStore, {
@@ -12,10 +13,16 @@ var GameStore = merge(BaseStore, {
 
   add_user(user) {
     this.add("users", user)
+    this._recountUsers()
   },
 
   remove_user(user) {
     this.remove("users", user)
+    this._recountUsers()
+  },
+
+  _recountUsers() {
+    this.set("userCount", this.get("users").length)
   }
 })
 

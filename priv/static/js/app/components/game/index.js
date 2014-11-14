@@ -31,16 +31,14 @@ var Game = React.createClass({
   },
 
   userList() {
-    if (this.state.users.length) {
-      return (
-        <div id="users">
-          <h4>Users present:</h4>
-          <ul>
-            {this.users()}
-          </ul>
-        </div>
-      )
-    }
+    return (
+      <div id="users">
+        <h4>Users present ({this.state.userCount}):</h4>
+        <ul>
+          {this.users()}
+        </ul>
+      </div>
+    )
   },
 
   render() {
