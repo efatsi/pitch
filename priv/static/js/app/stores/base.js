@@ -10,6 +10,13 @@ var CHANGE = "change"
 
 var BaseStore = merge(Events.EventEmitter.prototype, {
   /**
+   * Returns the entire object as a JS object
+   */
+  snapshot() {
+    return this.data.toJS()
+  },
+
+  /**
    * Adds an event listener to subscribe to data changes
    */
   onChange(callback) {

@@ -1,7 +1,7 @@
-var React     = require("react")
-var GameStore = require("../../stores/game")
-var Actions   = require("../../actions/chat")
-var User      = require("./user")
+var React   = require("react")
+var Store   = require("../../stores/game")
+var Actions = require("../../actions/chat")
+var User    = require("./user")
 
 var Game = React.createClass({
   getInitialState() {
@@ -9,9 +9,7 @@ var Game = React.createClass({
   },
 
   getState() {
-    return {
-      users: GameStore.get("users"),
-    }
+    return Store.snapshot()
   },
 
   updateState() {
@@ -19,11 +17,11 @@ var Game = React.createClass({
   },
 
   componentDidMount() {
-    GameStore.onChange(this.updateState)
+    Store.onChange(this.updateState)
   },
 
   componentWillUnmount() {
-    GameStore.offChange(this.updateState)
+    Store.offChange(this.updateState)
   },
 
   users() {

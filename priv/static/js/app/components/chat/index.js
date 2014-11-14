@@ -11,10 +11,7 @@ var Chat = React.createClass({
   },
 
   getState() {
-    return {
-      loggedIn: Store.get("loggedIn"),
-      messages: Store.get("messages")
-    }
+    return Store.snapshot()
   },
 
   updateState() {
