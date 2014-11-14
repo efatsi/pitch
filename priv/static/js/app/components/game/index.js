@@ -24,10 +24,14 @@ var Game = React.createClass({
     Store.offChange(this.updateState)
   },
 
+  active() {
+    return this.state.active ? "Active" : "Inactive"
+  },
+
   render() {
     return (
       <div>
-        <h3>Game area</h3>
+        <h3>Game area ({this.active()})</h3>
         <UserList users={this.state.users} />
       </div>
     )

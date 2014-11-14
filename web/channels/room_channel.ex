@@ -23,6 +23,13 @@ defmodule Pitch.RoomChannel do
     socket = assign(socket, :room, room)
 
     broadcast socket, "user:entered", %{id: user.id, username: user.name}
+
+    if Enum.count(users(room)) >= 4 && room.active == false do
+      room = %{room | active: true}
+      Repo.update(room)
+      broadcast socket, "game:begin", %{}
+    end
+
     socket
   end
 
