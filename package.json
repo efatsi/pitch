@@ -15,7 +15,8 @@
     "watchify"   : "latest"
   },
   "scripts": {
-    "build" : "browserify -t [ reactify --harmony ] priv/static/js/app/room.js > priv/static/js/bundle.js",
-    "watch" : "watchify -d -t [ reactify --harmony ] priv/static/js/app/room.js -o priv/static/js/bundle.js -v"
+    "production" : "browserify -t [ reactify --harmony ] priv/static/js/app/room.js > bundle.js",
+    "build"      : "browserify -t [ reactify --harmony ] priv/static/js/app/room.js > priv/static/js/bundle.js",
+    "watch"      : "watchify -d -t [ reactify --harmony ] priv/static/js/app/room.js -o priv/static/js/bundle.js -v"
   }
 }
